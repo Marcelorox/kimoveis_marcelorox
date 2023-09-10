@@ -1,4 +1,4 @@
-# Projeto Final: KImóveis - TypeORM com Relacionamentos
+# KImóveis - TypeORM com Relacionamentos
 
 ## Introdução
 
