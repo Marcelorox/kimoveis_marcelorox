@@ -1,4 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  BeforeInsert,
+  BeforeUpdate,
+  OneToMany,
+} from "typeorm";
+import { Schedule } from "./schedule.entity";
+import { getRounds, hashSync } from "bcryptjs";
 
 @Entity("users")
 export class Users {
@@ -24,5 +34,18 @@ export class Users {
   updatedAt: Date;
 
   @Column({ type: "date" })
-  deletedAt: Date;
+  deletedAt: Date | null;
+
+  @OneToMany(() => Schedule, (s) => s.user)
+  schedules: Array<Schedule>;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    const hasRounds: number = getRounds(this.password);
+
+    if (!hasRounds) {
+      this.password = hashSync(this.password, 10);
+    }
+  }
 }

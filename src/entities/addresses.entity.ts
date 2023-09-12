@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+
 @Entity("addresses")
 export class Address {
   @PrimaryGeneratedColumn()
@@ -18,4 +19,6 @@ export class Address {
 
   @Column({ type: "varchar", length: 2, nullable: false })
   state: string;
+
+  
 }
