@@ -1,6 +1,6 @@
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
-import { Users } from "../entities/user.entity";
+import { User } from "../entities/user.entity";
 import AppError from "../errors/app.errors";
 import {
   UserCreate,
@@ -11,7 +11,7 @@ import { userRepo } from "../repositories";
 import { UserReadSchemas, UserReturnSchema } from "../schemas/users.schema";
 
 const create = async (payload: UserCreate): Promise<UserReturn> => {
-  const user: Users = userRepo.create(payload);
+  const user: User = userRepo.create(payload);
   await userRepo.save(user);
 
   return UserReturnSchema.parse(user);
@@ -21,8 +21,8 @@ const read = async (): Promise<UserRead> => {
   return UserReadSchemas.parse(await userRepo.find({ withDeleted: true }));
 };
 
-const patch = async (user: Users, payload: Users): Promise<UserReturn> => {
-  const updateUser: Users = await userRepo.save({
+const patch = async (user: User, payload: User): Promise<UserReturn> => {
+  const updateUser: User = await userRepo.save({
     ...user,
     ...payload,
   });
@@ -30,11 +30,11 @@ const patch = async (user: Users, payload: Users): Promise<UserReturn> => {
   return UserReturnSchema.parse(updateUser);
 };
 
-const destroy = async (user: Users): Promise<void> => {
+const destroy = async (user: User): Promise<void> => {
   await userRepo.softRemove(user);
 };
 
-const login = async (payload: Users) => {
+const login = async (payload: User) => {
   const user = await userRepo.findOne({
     where: { email: payload.email },
   });
@@ -54,7 +54,7 @@ const login = async (payload: Users) => {
 
   const token: string = sign(
     {
-      email: user.email,
+      id: user.id,
       admin: user.admin,
     },
     process.env.SECRET_KEY!,

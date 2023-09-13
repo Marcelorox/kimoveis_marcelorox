@@ -5,17 +5,14 @@ import { usersControllers } from "../controllers";
 import { idExists } from "../middlewares/idExists.middlware";
 import { verifyAdmin, verifyJwt } from "../middlewares/checkAdmin.middleware";
 import { verifyEmailExists } from "../middlewares/verifyEmailExists.middleware";
+import { RealEstateSchemaOmit } from "../schemas/realEstate.schema";
+import realEstatesControllers from "../controllers/realEstates.controllers";
 
-export const userRouter: Router = Router();
-userRouter.post(
+export const EschedulesRouter: Router = Router();
+EschedulesRouter.post(
   "",
-  verifyEmailExists,
-  checkBody(UserCreateSchemasOmit),
-  usersControllers.create
+  verifyJwt,
+  verifyAdmin,
+  checkBody(RealEstateSchemaOmit),
+  realEstatesControllers.create
 );
-
-userRouter.get("", verifyJwt, verifyAdmin, usersControllers.read);
-
-userRouter.patch("/:id", verifyJwt, verifyAdmin, usersControllers.patch);
-
-userRouter.delete("/:id", idExists, usersControllers.destroy);

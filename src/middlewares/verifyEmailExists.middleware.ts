@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Users } from "../entities/user.entity";
+import { User } from "../entities/user.entity";
 import { userRepo } from "../repositories";
 import AppError from "../errors/app.errors";
 
@@ -10,7 +10,7 @@ export const verifyEmailExists = async (
 ): Promise<void> => {
   const email: string = req.body.email;
 
-  const foundEmail: Users | null = await userRepo.findOneBy({
+  const foundEmail: User | null = await userRepo.findOneBy({
     email: email,
   });
 

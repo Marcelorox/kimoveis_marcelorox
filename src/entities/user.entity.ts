@@ -10,8 +10,8 @@ import {
 import { Schedule } from "./schedule.entity";
 import { getRounds, hashSync } from "bcryptjs";
 
-@Entity("users")
-export class Users {
+@Entity("user")
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 

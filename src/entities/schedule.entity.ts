@@ -6,7 +6,7 @@ import {
   OneToMany,
 } from "typeorm";
 import { RealEstate } from "./realEstate.entity";
-import { Users } from "./user.entity";
+import { User } from "./user.entity";
 
 @Entity("schedule")
 export class Schedule {
@@ -22,6 +22,6 @@ export class Schedule {
   @ManyToOne(() => RealEstate, (realEstate) => realEstate.schedule)
   realEstate: RealEstate;
 
-  @ManyToOne(() => Users, (user) => user.schedules)
-  user: Users;
+  @ManyToOne(() => User, (user) => user.schedules)
+  user: User;
 }

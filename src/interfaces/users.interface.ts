@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { DeepPartial, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { Users } from "../entities/user.entity";
 import {
   UserCreateSchemasOmit,

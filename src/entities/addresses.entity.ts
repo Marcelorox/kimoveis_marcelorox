@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("addresses")
 export class Address {
@@ -19,6 +19,4 @@ export class Address {
 
   @Column({ type: "varchar", length: 2, nullable: false })
   state: string;
-
-  
 }

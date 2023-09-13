@@ -17,6 +17,7 @@ const UserCreateSchemasOmit = UserSchema.omit({
   updatedAt: true,
   deletedAt: true,
 });
+
 const UserReturnSchema = UserSchema.omit({ password: true });
 const UserReadSchemas = UserReturnSchema.array();
 

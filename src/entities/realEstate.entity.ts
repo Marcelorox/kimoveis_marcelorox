@@ -16,6 +16,9 @@ export class RealEstate {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ type: "integer" })
+  size: number;
+
   @Column({ type: "boolean", default: false, nullable: false })
   sold: boolean;
 
@@ -26,10 +29,7 @@ export class RealEstate {
     default: 0,
     nullable: false,
   })
-  value: number;
-
-  @Column({ type: "integer" })
-  size: number;
+  value: string;
 
   @Column({ type: "date", nullable: false })
   createdAt: Date;
