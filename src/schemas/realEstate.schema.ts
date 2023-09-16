@@ -18,12 +18,14 @@ const RealEstateSchema = z.object({
 });
 
 const RealEstateSchemaOmit = RealEstateSchema.omit({
+  id: true,
   createdAt: true,
   updatedAt: true,
   deletedAt: true,
 });
 
 const RealEstateReturnSchema = RealEstateSchemaOmit.omit({ sold: true });
+
 const RealEstateReadSchemas = RealEstateReturnSchema.array();
 
 export {
